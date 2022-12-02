@@ -18,7 +18,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pylint.basic]
-good-names = ["i", "j", "k", "_", "fp"]
+good-names = ["i", "j", "k", "_", "fp", "x", "y"]
 
 [tool.pylint."messages control"]
 disable = ["raw-checker-failed", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message", "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "missing-module-docstring", "missing-function-docstring", "missing-class-docstring"]
