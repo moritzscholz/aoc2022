@@ -1,6 +1,6 @@
 from src.day1.day1 import find_most_calories, find_topmost_calories
 from src.day2.rock_paper_scissors import puzzle1_score, puzzle2_score
-from src.day3.find_items import sum_of_item_priorities
+from src.day3.find_items import sum_of_item_priorities, sum_of_badge_priorities
 
 if __name__ == "__main__":
     print("Solutions:")
@@ -12,3 +12,4 @@ if __name__ == "__main__":
     print(f"Day 2, puzzle 2: {puzzle2_score()}")
 
     print(f"Day 3, puzzle 1: {sum_of_item_priorities()}")
+    print(f"Day 3, puzzle 2: {sum_of_badge_priorities()}")

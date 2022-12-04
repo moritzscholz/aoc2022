@@ -1,4 +1,4 @@
-from src.day3.find_items import Item, sum_of_item_priorities
+from src.day3.find_items import Item, sum_of_item_priorities, sum_of_badge_priorities
 from . import TEST_RESOURCES
 
 
@@ -13,3 +13,7 @@ def test_priorities():
 
 def test_example():
     assert sum_of_item_priorities(TEST_RESOURCES / "day3_example.txt") == 157
+
+
+def test_badge_priorities():
+    assert sum_of_badge_priorities(TEST_RESOURCES / "day3_example2.txt") == 70

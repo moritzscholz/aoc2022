@@ -37,7 +37,7 @@ class Rucksack:
             cls.__items_from_string(second_compartment),
         ]
 
-        return cls(content)
+        return Rucksack(content)
 
     @staticmethod
     def __items_from_string(string: str) -> list[Item]:
@@ -52,6 +52,30 @@ class Rucksack:
             "There is no item in both compartments. Rucksack content is: "
             + self.content
         )
+
+    @property
+    def items(self) -> list[Item]:
+        return [item for compartment in self.content for item in compartment]
+
+    def contains(self, item: Item) -> bool:
+        return item in self.items
+
+
+@dataclass
+class Group:
+    rucksacks: list[Rucksack]
+
+    @classmethod
+    def from_rows(cls, rows: list[str]) -> "Group":
+        return Group(rucksacks=[Rucksack.from_string(row) for row in rows])
+
+    @property
+    def badge(self) -> Item:
+        for item in self.rucksacks[0].items:
+            if all(r.contains(item) for r in self.rucksacks[1:]):
+                return item
+
+        raise ValueError("There is no item that is contained in all rucksacks.")
 
 
 def __find_items_in_both_compartments(packing_info: Path) -> list[Item]:
@@ -69,3 +93,18 @@ def sum_of_item_priorities(
     return sum(
         item.priority for item in __find_items_in_both_compartments(packing_info)
     )
+
+
+def sum_of_badge_priorities(
+    packing_info: Path = Path(__file__).parent / "input.txt", group_size: int = 3
+) -> int:
+    groups: list[Group] = []
+
+    with open(packing_info, "r", encoding="utf-8") as fp:
+        while True:
+            rows: list[str] = [fp.readline() for _ in range(0, group_size)]
+            if len(rows[-1].strip()) == 0:
+                break
+            groups.append(Group.from_rows(rows))
+
+    return sum(g.badge.priority for g in groups)
